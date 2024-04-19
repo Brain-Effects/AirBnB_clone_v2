@@ -140,3 +140,9 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 (hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'name': 'Fred the Frog', 'age': 9, 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
 ```
 <br>
+
+Name: Khayalethu Tsolwana
+
+## Description of the Project
+
+This project is an attempt to fork the AirBnB application. The first step is to fork and update the repository name to AirBnB_clone_v2. This will allow us to use the repository without affecting changes to the original repository. We will use what I build during this project with all other following projects: HTML/CSS templating, database storage, API, front-end integration.
