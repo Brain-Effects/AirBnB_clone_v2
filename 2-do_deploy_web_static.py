@@ -26,21 +26,21 @@ def do_deploy(archive_path):
         # on the web server
         archive_name = os.path.basename(archive_path)
         archive_name_no_ext = os.path.splitext(archive_name)[0]
-        run("mkdir -p /data/web_static/releases/{}".format(
+        run("sudo mkdir -p /data/web_static/releases/{}".format(
             archive_name_no_ext))
-        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}".format(
+        run("sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}".format(
             archive_name, archive_name_no_ext))
 
         # Delete the archive from the web server
-        run("rm /tmp/{}".format(archive_name))
+        run("sudo rm /tmp/{}".format(archive_name))
 
         # Delete the symbolic link /data/web_static/current from the web server
-        run("rm -rf /data/web_static/current")
+        run("sudo rm -rf /data/web_static/current")
 
         # Create a new the symbolic link /data/web_static/current on the web
         # server, linked to the new version of your code
         # (/data/web_static/releases/<archive filename without extension>)
-        run("ln -s /data/web_static/releases/{\
+        run("sudo ln -s /data/web_static/releases/{\
                 } /data/web_static/current".format(archive_name_no_ext))
 
         return True
