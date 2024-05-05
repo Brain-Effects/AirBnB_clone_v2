@@ -6,6 +6,8 @@ import datetime
 from uuid import UUID
 import json
 import os
+from console import HBNBCommand
+from models import storage
 
 
 class test_basemodel(unittest.TestCase):
@@ -97,3 +99,37 @@ class test_basemodel(unittest.TestCase):
         n = new.to_dict()
         new = BaseModel(**n)
         self.assertFalse(new.created_at == new.updated_at)
+
+
+class TestCreateCommand(unittest.TestCase):
+    """Test cases for the 'create' command"""
+
+    def setUp(self):
+        """Set up test environment"""
+        self.cli = HBNBCommand()
+
+    def test_create_with_parameters(self):
+        """Test the 'create' command with parameters"""
+        initial_count = len(storage.all("User"))
+        self.cli.onecmd('create User email="test@example.com" password="pwd"')
+        self.assertEqual(len(storage.all("User")), initial_count + 1)
+
+    def test_create_with_invalid_parameters(self):
+        """Test the 'create' command with invalid parameters"""
+        initial_count = len(storage.all("User"))
+        self.cli.onecmd('create User invalid_param')
+        self.assertEqual(len(storage.all("User")), initial_count + 1)
+
+    def test_create_with_no_class(self):
+        """Test the 'create' command with no class name"""
+        with self.assertRaises(SystemExit):
+            self.cli.onecmd('create')
+
+    def test_create_with_invalid_class(self):
+        """Test the 'create' command with an invalid class name"""
+        with self.assertRaises(SystemExit):
+            self.cli.onecmd('create InvalidClass')
+
+
+if __name__ == "__main__":
+    unittest.main()
